@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201227143139) do
+ActiveRecord::Schema.define(version: 20201227145611) do
 
   create_table "players", force: :cascade do |t|
-    t.string "name"
-    t.string "position"
+    t.string  "name"
+    t.string  "position"
+    t.integer "team_id"
   end
 
   create_table "teams", force: :cascade do |t|
