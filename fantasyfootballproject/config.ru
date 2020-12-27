@@ -6,6 +6,7 @@ end
 
 use Rack::MethodOverride
 
+use LeagueController
 use SessionController
 use UserController
 run ApplicationController
