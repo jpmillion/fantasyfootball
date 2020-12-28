@@ -1,6 +1,7 @@
 class PlayerController < ApplicationController
     
     get '/players/new' do
+        redirect '/login' if !logged_in?
         @teams = current_user.teams
         erb :'players/new'
     end
