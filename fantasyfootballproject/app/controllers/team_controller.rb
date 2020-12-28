@@ -1,5 +1,9 @@
 class TeamController < ApplicationController
 
+    before '/teams/*' do
+        login_required
+    end
+    
     get '/teams/new' do
         redirect '/login' if !logged_in?
         @leagues = League.all

@@ -1,5 +1,9 @@
 class LeagueController < ApplicationController
 
+    before '/leagues/*' do
+        login_required
+    end
+
     get '/leagues/new' do
         @leagues = League.all
         erb :'leagues/new'

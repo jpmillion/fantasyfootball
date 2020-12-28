@@ -1,5 +1,9 @@
 class UserController < ApplicationController
 
+    before '/users/*' do
+        login_required
+    end
+
     get '/users' do
         @users = User.all 
         erb :'users/index'
