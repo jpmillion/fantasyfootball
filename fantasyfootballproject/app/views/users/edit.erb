@@ -1,0 +1,23 @@
+<h1>Update User Profile</h1>
+
+
+<form action="/users" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="text" name="username" value="<%= @user.username %>"><br><br>
+    <input type="email" name="email" value="<%= @user.email %>"><br><br>
+
+
+    <h3>Quit League</h3>
+
+    <% @user.leagues.each do |league| %>
+
+        <input id="<%= league.id %>" type="checkbox" name="leagues[]" value="<%= league.id %>">
+        <label for="<%= league.id %>"><%= league.name %></label><br>
+
+    <% end %>
+    <br><br>
+
+    <input type="submit" value="Update Profile">
+</form>
+<br><br>
+<a href="/users/<%= @user.id %>">Home</a>

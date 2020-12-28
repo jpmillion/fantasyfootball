@@ -5,3 +5,7 @@
     <li><%= player.name %> <%= player.position %></li>
 
 <% end %>
+<br><br>
+<a href="/players/new">Click to add a player to <%= @team.name.titleize %> roster</a>
+<br><br>
+<p><a href="/users/<%= current_user.id %>">Home</a> <a href="/teams/<%= @team.id %>/edit">Edit Team</a></p>

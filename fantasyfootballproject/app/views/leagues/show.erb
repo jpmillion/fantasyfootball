@@ -1,7 +1,13 @@
-<h1><%= @league.name %></h1>
+<h1>League: <%= @league.name %></h1>
+<h4><a href="/leagues/:id/edit"><button>Change League Name</button></a></h4><br><br>
 
+<h4>Teams</h4>
 <% @league.teams.each do |team| %>
 
-    <a href="/teams/<%= team.id %>"><%= team.name %></a><br><br><br>
+    <p>Team: <a href="/teams/<%= team.id %>"><%= team.name %></a> User: <%= team.user.username %></p><br><br><br>
 
 <% end %>
+
+<br><br><br>
+
+<a href="/users/<%= current_user.id %>">Home</a>

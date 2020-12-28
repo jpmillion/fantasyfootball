@@ -24,4 +24,16 @@ class TeamController < ApplicationController
         @team = Team.find(params[:id])
         erb :'teams/show'
     end
+
+    get '/teams/:id/edit' do
+        @team = Team.find(params[:id])
+        erb :'teams/edit'
+    end
+
+    patch '/teams/:id' do
+        team = Team.find(params[:id])
+        team.update(name: params[:team_name])
+        params[:players].each {|id| Player.find(id).destroy}
+        redirect "/teams/#{team.id}"
+    end
 end

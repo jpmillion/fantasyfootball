@@ -21,4 +21,19 @@ class UserController < ApplicationController
         erb :'users/show'
     end
 
+    get '/users/:id/edit' do
+        login_required
+        @user = User.find(params[:id])
+        erb :'users/edit'
+    end
+
+    patch '/users' do
+        current_user.update(username: params[:username], email: params[:email])
+        params[:leagues].each do |id| 
+            Team.find_by(league_id: id).destroy
+            current_user.leagues.destroy(id)
+        end
+        redirect "/users/#{current_user.id}"
+    end
+
 end

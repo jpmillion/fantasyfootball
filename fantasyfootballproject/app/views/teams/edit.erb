@@ -1,0 +1,21 @@
+<h1>Edit <%= @team.name.capitalize %></h1>
+
+<form action="/teams/<%= @team.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <input type="text" name="team_name" value="<%= @team.name %>">
+
+    <% @team.players.each do |player| %>
+
+        <p><input type="checkbox" name="players[]" value="<%= player.id %>"><%= player.name.titleize %></p>
+        <br>
+
+    <% end %>
+    <br>
+
+    <input type="submit" value="Edit Team">
+</form>
+<br><br><br>
+<p><a href="/users/<%= current_user.id %>">Home</a> <a href="/teams/<%= @team.id %>">Team Home</a></p>
+
+ 
