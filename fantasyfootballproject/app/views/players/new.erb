@@ -1,0 +1,13 @@
+<form action="/players" method="post">
+<% @teams.each do |team| %>
+    <p><input type="radio" name="team_id" value="<%= team.id %>">Team: <%= team.name %>; League: <%= team.league.name %></p>
+<% end %>
+
+<input type="text" name="name" placeholder="Enter Player's Name">
+
+<% ['running back', 'quarterback', 'receiver'].each do |position| %>
+    <p><input type="radio" name="position" value="<%= position %>"><%= position %></p>
+<% end %>
+    
+<input type="submit" value="Add Player to Team">
+</form>
