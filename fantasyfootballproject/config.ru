@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-
+use TeamController
 use LeagueController
 use SessionController
 use UserController
