@@ -19,4 +19,9 @@ class TeamController < ApplicationController
         team.save
         redirect "/users/#{current_user.id}"
     end
+
+    get '/teams/:id' do
+        @team = Team.find(params[:id])
+        erb :'teams/show'
+    end
 end
