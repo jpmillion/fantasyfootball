@@ -1,0 +1,10 @@
+<% @users.each do |user| %>
+
+    <p>Username: <%= user.username %><br>
+    Leagues: <%= user.leagues.map {|league| league.name}.join(', ') %><br>
+    </p>
+
+<% end %>
+
+    
+

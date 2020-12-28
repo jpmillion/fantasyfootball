@@ -1,6 +1,6 @@
 <form action="/leagues" method="post">
 <% @leagues.each do |league| %>
-    <p><input type="checkbox" name="leagues[]" value="<%= league.id %>" <%= 'checked' if current_user.leagues.include?(league) %>><%= league.name %></p>
+    <p><input type="checkbox" name="leagues[]" value="<%= league.id %>" <%= 'hidden' if current_user.leagues.include?(league) %>><%= league.name %></p>
 <% end %>
     <input type="text" name="league_name" placeholder="Create New League"><br>
     <input type="submit" value="Join League(s)">

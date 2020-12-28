@@ -1,6 +1,6 @@
 <h1><%= @user.username %></h1>
 <% @user.leagues.each do |league| %>
-    <p><%= league.name %></p>
+    <a href="/leagues/<%= league.id %>"><%= league.name %></a><br><br><br>
 <% end %>
 <a href="/leagues/new">Join League</a>
 <a href="/logout">Log out</a>

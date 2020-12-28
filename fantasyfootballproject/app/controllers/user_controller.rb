@@ -1,9 +1,5 @@
 class UserController < ApplicationController
 
-    before '/users/*' do
-        login_required
-    end
-
     get '/users' do
         @users = User.all 
         erb :'users/index'
@@ -15,11 +11,12 @@ class UserController < ApplicationController
 
     post '/users' do
         user = User.create(params[:user])
+        session[:user_id] = user.id
         redirect "/users/#{user.id}"
     end
 
     get '/users/:id' do
-        redirect '/login' if !logged_in?
+        login_required
         @user = User.find(session[:user_id])
         erb :'users/show'
     end
