@@ -9,10 +9,7 @@ class UserController < ApplicationController
     end
 
     post '/users' do
-        if (params[:user][:username] || params[:user][:email] || params[:user][:password]) == ''
-            flash[:notice] = 'All fields are required'
-            redirect 'users/new'
-        end
+        redirect 'users/new' if params[:user].values.any?('')
         user = User.create(params[:user])
         session[:user_id] = user.id
         redirect "/users/#{user.id}"

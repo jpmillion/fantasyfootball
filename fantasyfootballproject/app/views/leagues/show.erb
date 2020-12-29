@@ -1,12 +1,18 @@
 
 <div style="text-align: center">
-<h1>League: <%= @league.name.titleize %></h1>
+<h1><%= @league.name.titleize %> League</h1>
 <br><br>
 
-<h4>Teams</h4>
+<h4>Teams</h4><br>
 <% @league.teams.each do |team| %>
 
-    <p>Team: <a href="/teams/<%= team.id %>"><%= team.name.titleize %></a> User: <%= team.user.username.titleize %></p><br><br><br>
+    <p>Team: <% if team.user == current_user %> 
+                <a href="/teams/<%= team.id %>"><%= team.name.titleize %></a>
+             <% else %>
+                <%= team.name.titleize %>
+             <% end %> 
+    <br><br>
+    User: <%= team.user.username.titleize %></p><br>
 
 <% end %>
 

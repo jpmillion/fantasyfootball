@@ -1,15 +1,15 @@
 
 <div style="text-align: center;">
-<h1><%= @team.name %></h1>
-
+<h1><%= @team.name.titleize %></h1>
+<h3>Team Roster</h3><br><br>
 <% @team.players.each do |player| %>
-
-    <li><%= player.name %> <%= player.position %></li>
+    <p><%= player.position.titleize %><br><br>
+    <%= player.name.titleize %></p>
     <form action="/players" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="player_id" value="<%= player.id %>">
         <input type="hidden" name="team_id" value="<%= @team.id %>">
-        <input type="submit" value="Delete Player"><br><br>
+        <input type="submit" value="Delete Player"><br><br><br><br>
     </form>
 
 <% end %>
@@ -18,7 +18,7 @@
 <form action="/players" method="post">
     <input type="text" name="name" placeholder="Enter Player Name"><br><br>
     
-    <% ['running back', 'quarterback', 'receiver'].each do |position| %>
+    <% ['Running Back', 'Quarterback', 'Receiver'].each do |position| %>
         <p><input type="radio" name="position" value="<%= position %>"><%= position %></p>
     <% end %>
 

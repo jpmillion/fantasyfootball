@@ -1,6 +1,7 @@
 class SessionController < ApplicationController
 
     get '/login' do
+        redirect "/users/#{current_user.id}" if logged_in?
         erb :'sessions/login'
     end
 

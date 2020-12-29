@@ -16,6 +16,7 @@ class TeamController < ApplicationController
 
     patch '/teams/:id' do
         team = Team.find(params[:id])
+        redirect "/teams/#{team.id}/edit" if params[:team_name] == '' 
         team.update(name: params[:team_name])
         redirect "/teams/#{team.id}"
     end
