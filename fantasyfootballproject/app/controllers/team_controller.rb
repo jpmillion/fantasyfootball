@@ -3,22 +3,6 @@ class TeamController < ApplicationController
     before '/teams/*' do
         login_required
     end
-    
-    get '/teams/new' do
-        redirect '/login' if !logged_in?
-        @leagues = League.all
-        erb :'teams/new' 
-    end
-
-    post '/teams' do
-        league = League.find(params[:league_id])
-        redirect '/teams/new' if params[:team_name] == '' || !league || league.teams.detect {|team| team.name == params[:team_name]}
-        team = Team.new(name: params[:team_name])
-        team.user = current_user
-        team.league = league
-        team.save
-        redirect "/users/#{current_user.id}"
-    end
 
     get '/teams/:id' do
         @team = Team.find(params[:id])
@@ -35,5 +19,11 @@ class TeamController < ApplicationController
         team.update(name: params[:team_name])
         params[:players].each {|id| Player.find(id).destroy}
         redirect "/teams/#{team.id}"
+    end
+
+    delete '/teams' do
+        league = League.find(params[:league_id])
+        current_user.teams.detect {|team| team.league == league}.delete
+        redirect "/users/#{current_user.id}"
     end
 end

@@ -4,11 +4,6 @@ class LeagueController < ApplicationController
         login_required
     end
 
-    get '/leagues' do
-        @leagues = League.all
-        erb :'leagues/index'
-    end
-
     get '/leagues/join' do
         @leagues = League.all
         erb :'leagues/join'
