@@ -17,7 +17,6 @@ class TeamController < ApplicationController
     patch '/teams/:id' do
         team = Team.find(params[:id])
         team.update(name: params[:team_name])
-        params[:players].each {|id| Player.find(id).destroy}
         redirect "/teams/#{team.id}"
     end
 

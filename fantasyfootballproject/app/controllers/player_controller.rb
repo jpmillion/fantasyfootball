@@ -3,11 +3,6 @@ class PlayerController < ApplicationController
     before '/players/*' do
         login_required
     end
-    
-    get '/players/new' do
-        @teams = current_user.teams
-        erb :'players/new'
-    end
 
     post '/players' do
         team = Team.find(params[:team_id]) if params[:team_id] != nil
@@ -17,8 +12,7 @@ class PlayerController < ApplicationController
         redirect "/teams/#{team.id}"
     end
 
-    delete '/players' do
-        binding.pry 
+    delete '/players' do 
         Player.delete(params[:player_id])
         redirect "/teams/#{params[:team_id]}"
     end

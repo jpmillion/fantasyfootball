@@ -1,9 +1,0 @@
-<form action="/teams" method="post">
-<% @leagues.each do |league| %>
-    <p><input type="radio" name="league_id" value="<%= league.id %>"><%= league.name %></p>
-<% end %>
-    
-    <input type="text" name="team_name" placeholder="Enter Team Name">
-    <input type="submit" value="Create Team">
-
-</form>
