@@ -3,8 +3,8 @@
 <h1><%= @team.name.titleize %></h1>
 <h3>Team Roster</h3><br><br>
 <% @team.players.each do |player| %>
-    <p><%= player.position.titleize %><br><br>
-    <%= player.name.titleize %></p>
+    <p><%= player.name.titleize %><br><br>
+    <%= player.position.titleize %></p>
     <form action="/players" method="post">
         <input type="hidden" name="_method" value="delete">
         <input type="hidden" name="player_id" value="<%= player.id %>">
@@ -16,6 +16,7 @@
 <br><br>
 <div style="float: left;">
 <form action="/players" method="post">
+    <h5>Add Player to Roster</h5><br>
     <input type="text" name="name" placeholder="Enter Player Name"><br><br>
     
     <% ['Running Back', 'Quarterback', 'Receiver'].each do |position| %>
@@ -24,13 +25,14 @@
 
     <input type="hidden" name="team_id" value="<%= @team.id %>">
     
-    <input type="submit" value="Add Player to Team"><br><br>
+    <input type="submit" value="Add Player"><br><br>
 </form>
 </div>
 <br><br>
 <div style="float: right;">
-<p><a href="/users/<%= current_user.id %>">Home</a><br><br>
-<a href="/teams/<%= @team.id %>/edit">Change Team Name</a><br><br>
+<p><a href="/teams/<%= @team.id %>/edit">Change Team Name</a><br><br>
+<a href="/leagues/<%= @team.league.id%>">League Home</a><br><br>
+<a href="/users/<%= current_user.id %>">Home</a><br><br>
 <a href="/logout">Log Out</a></p>
 
 </div>

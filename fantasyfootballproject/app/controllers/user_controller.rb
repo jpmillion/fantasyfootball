@@ -4,15 +4,26 @@ class UserController < ApplicationController
 
     use Rack::Flash
 
+    get '/users' do
+        login_required
+        @users = User.all  
+        erb :'users/index'
+    end
+
     get '/users/new' do
+        redirect "/users/#{current_user.id}" if logged_in?
         erb :'users/new'
     end
 
     post '/users' do
-        redirect 'users/new' if params[:user].values.any?('')
         user = User.create(params[:user])
-        session[:user_id] = user.id
-        redirect "/users/#{user.id}"
+        if user.valid?
+            session[:user_id] = user.id
+            redirect "/users/#{user.id}"
+        else
+            user.delete
+            redirect 'users/new'
+        end
     end
 
     get '/users/:id' do

@@ -26,7 +26,10 @@ class ApplicationController < Sinatra::Base
     end
 
     def login_required
-      redirect '/' if !logged_in?
+      if !logged_in?
+        flash[:notice] = "Login Required"
+        redirect '/login'
+      end
     end
   end
 

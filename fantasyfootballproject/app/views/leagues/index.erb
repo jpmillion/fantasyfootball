@@ -1,0 +1,20 @@
+<div style="text-align: center;">
+
+<a style="float: right;" href="/users/<%= current_user.id %>">Home</a>
+
+<h1>Leagues</h1><br>
+
+<% @leagues.each do |league| %>
+
+    <p><%= league.name.titleize %> League</p>
+    <p>Teams</p>
+    <% league.teams.each do |team| %>
+
+        <p><%= team.name.titleize %>;    User: <%= team.user.username.titleize %></p>
+
+    <% end %>
+    <br><br>
+<% end %>
+
+
+</div>

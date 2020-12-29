@@ -1,4 +1,8 @@
 
+<% if flash.has?(:notice) %>
+    <%= flash[:notice] %>
+<% end %>
+
 <div style="text-align: center;">
 <form action="/leagues" method="post">
 <h2>Join an Existing League:</h2>
