@@ -1,0 +1,17 @@
+
+<div style="text-align: center;">
+<form action="/leagues" method="post">
+<h2>Join an Existing League:</h2>
+<% @leagues.each do |league| %>
+    <p><input type="radio" name="league_id" value="<%= league.id %>" <%= 'hidden' if current_user.leagues.include?(league) %>>   <%= league.name.titleize %></p>
+<% end %>
+<br><br>
+<h2>Must create team for League</h2><br>
+<input type="text" name="team_name" placeholder="Enter Team Name">
+<br><br><br><br><br>
+    <input type="submit" value="Join League"><br><br>
+    <a href="/users/<%= current_user.id %>" style="float: right;">Home</a><br><br>
+    <a href="/logout" style="float: right;">Log Out</a>
+
+</form>
+</div>

@@ -1,3 +1,5 @@
+
+
 class UserController < ApplicationController
 
     get '/users' do
@@ -30,10 +32,16 @@ class UserController < ApplicationController
     patch '/users' do
         current_user.update(username: params[:username], email: params[:email])
         params[:leagues].each do |id| 
-            Team.find_by(league_id: id).destroy
+            Team.find_by(league_id: id).destroy if Team.find_by(league_id: id)
             current_user.leagues.destroy(id)
         end
         redirect "/users/#{current_user.id}"
+    end
+
+    delete '/users' do
+        current_user.destroy
+        session.clear
+        redirect '/'
     end
 
 end

@@ -11,10 +11,15 @@ class PlayerController < ApplicationController
 
     post '/players' do
         team = Team.find(params[:team_id]) if params[:team_id] != nil
-        redirect '/players/new' if params[:name] == '' || params[:position] == nil || !team || team.league.players.detect {|player| player.name == params[:name]}
+        redirect "/teams/#{team.id}" if params[:name] == '' || params[:position] == nil || team.league.players.any? {|player| player.name == params[:name]}
         player = Player.new(name: params[:name], position: params[:position])
-        player.team = team
-        player.save
-        redirect "/users/#{current_user.id}"
+        team.players << player
+        redirect "/teams/#{team.id}"
+    end
+
+    delete '/players' do
+        binding.pry 
+        Player.delete(params[:player_id])
+        redirect "/teams/#{params[:team_id]}"
     end
 end

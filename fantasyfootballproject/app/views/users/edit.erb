@@ -19,5 +19,11 @@
 
     <input type="submit" value="Update Profile">
 </form>
+<br>
+<p>or</p>
+<form action="/users" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Your Account">
+</form>
 <br><br>
 <a href="/users/<%= @user.id %>">Home</a>

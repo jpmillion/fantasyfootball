@@ -1,11 +1,35 @@
+
+<div style="text-align: center;">
 <h1><%= @team.name %></h1>
 
 <% @team.players.each do |player| %>
 
     <li><%= player.name %> <%= player.position %></li>
+    <form action="/players" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="player_id" value="<%= player.id %>">
+        <input type="hidden" name="team_id" value="<%= @team.id %>">
+        <input type="submit" value="Delete Player"><br><br>
+    </form>
 
 <% end %>
 <br><br>
-<a href="/players/new">Click to add a player to <%= @team.name.titleize %> roster</a>
+<div style="float: left;">
+<form action="/players" method="post">
+    <input type="text" name="name" placeholder="Enter Player Name"><br><br>
+    
+    <% ['running back', 'quarterback', 'receiver'].each do |position| %>
+        <p><input type="radio" name="position" value="<%= position %>"><%= position %></p>
+    <% end %>
+
+    <input type="hidden" name="team_id" value="<%= @team.id %>">
+    
+    <input type="submit" value="Add Player to Team"><br><br>
+</form>
+</div>
 <br><br>
-<p><a href="/users/<%= current_user.id %>">Home</a> <a href="/teams/<%= @team.id %>/edit">Edit Team</a></p>
+<div style="float: right;">
+<p><a href="/users/<%= current_user.id %>">Home</a><br><br>
+<a href="/teams/<%= @team.id %>/edit">Edit Team</a></p>
+</div>
+</div>

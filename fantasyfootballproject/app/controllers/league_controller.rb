@@ -9,14 +9,16 @@ class LeagueController < ApplicationController
         erb :'leagues/index'
     end
 
-    get '/leagues/new' do
+    get '/leagues/join' do
         @leagues = League.all
-        erb :'leagues/new'
+        erb :'leagues/join'
     end
 
     post '/leagues' do
-        params[:leagues].each {|id| current_user.leagues << League.find(id)} if params[:leagues] != nil
-        current_user.leagues << League.create(name: params[:league_name]) if params[:league_name] != ''
+        redirect '/leagues/join' if !params[:league_id] || params[:team_name] == ''
+        team = Team.new(name: params[:team_name])
+        League.find(params[:league_id]).teams << team
+        current_user.teams << team
         redirect "/users/#{current_user.id}"
     end
 

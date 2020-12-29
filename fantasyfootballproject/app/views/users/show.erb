@@ -1,12 +1,16 @@
-<h2>Username: <%= @user.username %>     Email: <%= @user.email %></h2>  
+<div style="text-align: center;">
+
+<h2>Username: <%= @user.username.titleize %>     Email: <%= @user.email %></h2>  
 
 <a href="/users/<%= @user.id %>/edit"><button>Update Profile</button></a><br><br><br>
 
 <h3>Current Leagues:</h3>
 <% @user.leagues.each do |league| %>
-    <a href="/leagues/<%= league.id %>"><%= league.name %></a><br><br><br>
+    <a href="/leagues/<%= league.id %>"><%= league.name.titleize %></a><br><br><br>
 <% end %>
-<br><br><br>
-<a href="/leagues/new">Join/Create League</a>
-<a href="/teams/new">Create New Team</a>
-<a href="/logout">Log out</a>
+<br><br><br><br><br>
+
+<a href="/leagues/join" style="float: left;">Join Existing League</a>
+<a href="/logout" style="float: right;">Log out</a>
+
+</div>

@@ -1,13 +1,19 @@
-<h1>League: <%= @league.name %></h1>
-<h4><a href="/leagues/:id/edit"><button>Change League Name</button></a></h4><br><br>
+
+<div style="text-align: center">
+<h1>League: <%= @league.name.titleize %></h1>
+<br><br>
 
 <h4>Teams</h4>
 <% @league.teams.each do |team| %>
 
-    <p>Team: <a href="/teams/<%= team.id %>"><%= team.name %></a> User: <%= team.user.username %></p><br><br><br>
+    <p>Team: <a href="/teams/<%= team.id %>"><%= team.name.titleize %></a> User: <%= team.user.username.titleize %></p><br><br><br>
 
 <% end %>
 
 <br><br><br>
 
-<a href="/users/<%= current_user.id %>">Home</a>
+<a href="/users/<%= current_user.id %>" style="float: right;">Home</a><br><br>
+<a href="/logout" style="float: right;">Log Out</a><br><br>
+
+
+</div>
