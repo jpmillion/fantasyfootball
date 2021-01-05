@@ -14,6 +14,7 @@ class UserController < ApplicationController
 
     get '/users/new' do
         redirect "/users/#{current_user.id}" if logged_in?
+        
         erb :'users/new'
     end
 
