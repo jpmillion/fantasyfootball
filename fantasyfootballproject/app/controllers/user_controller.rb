@@ -2,7 +2,7 @@
 
 class UserController < ApplicationController
 
-    before '/users/*' do
+    before '/users/:id/*' do
         login_required
     end
     
@@ -28,24 +28,22 @@ class UserController < ApplicationController
     end
 
     get '/users/:id' do
-        login_required
-        @user = User.find(current_user.id)
+        @user = current_user
         erb :'users/show'
     end
 
     get '/users/:id/edit' do
-        login_required
         @user = current_user
         erb :'users/edit'
     end
 
     patch '/users/:id' do
-        @user = User.find(params[:id])
+        user = User.find(params[:id])
         
-        if @user.update(username: params[:username], email: params[:email])
-            redirect "/users/#{@user.id}"
-        else 
-            redirect "/users/#{@user.id}/edit"
+        if user.update(params[:user])  
+            redirect "/users/#{user.id}" 
+        else
+            redirect "/users/#{user.id}/edit"
         end
     end
 

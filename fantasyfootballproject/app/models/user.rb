@@ -7,12 +7,4 @@ class User < ActiveRecord::Base
     has_many :leagues, through: :teams
     has_many :players, through: :teams
 
-    after_update do |user|
-        puts "You have successfully updated your acount"
-    end
-
-    after_save do |user|
-        puts "You have successfully saved your account"
-    end
-
 end
