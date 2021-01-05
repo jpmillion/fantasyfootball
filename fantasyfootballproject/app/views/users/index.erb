@@ -6,7 +6,7 @@
   <p>User: <%= user.username.titleize %></p>
   <p>Teams:</p>
   <% user.teams.each do |team| %>
-    <p><%= team.name %></p>
+    <p><%= team.name.titleize %></p>
   <% end %>
   <br><br>
 <% end %>

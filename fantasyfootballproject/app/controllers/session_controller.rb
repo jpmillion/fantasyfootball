@@ -1,3 +1,5 @@
+require 'rack-flash'
+require 'sinatra/redirect_with_flash'
 class SessionController < ApplicationController
 
     get '/login' do

@@ -1,9 +1,5 @@
 require './config/environment'
-require 'rack-flash'
-require 'sinatra/redirect_with_flash'
 class ApplicationController < Sinatra::Base
-
-  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -18,6 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+
     def logged_in?
       !!session[:user_id]
     end
@@ -28,7 +25,7 @@ class ApplicationController < Sinatra::Base
 
     def login_required
       if !logged_in?
-        redirect '/login', notice: "Login Required!"
+        redirect '/login'
       end
     end
   end

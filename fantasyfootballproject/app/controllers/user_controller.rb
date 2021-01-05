@@ -1,8 +1,6 @@
-require 'rack-flash'
+
 
 class UserController < ApplicationController
-
-    use Rack::Flash
 
     get '/users' do
         login_required

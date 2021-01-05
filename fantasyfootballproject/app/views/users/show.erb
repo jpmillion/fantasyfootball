@@ -5,19 +5,20 @@
 
 <br>
 
-<h3>Current Leagues:</h3>
-<% @user.leagues.each do |league| %>
-    <a href="/leagues/<%= league.id %>"><%= league.name.titleize %></a><br><br>
+<h3>Current Leagues:</h3><br>
+<% @user.teams.each do |team| %>
+    <p>League: <a href="/leagues/<%= team.league.id %>"><%= team.league.name.titleize %></a> Team: <a href="/teams/<%= team.id %>"><%= team.name.titleize %></a><br>
     <form action="/teams" method="post">
         <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="league_id" value="<%= league.id %>">
+        <input type="hidden" name="league_id" value="<%= team.league.id %>">
         <input type="submit" value="Quit League">
     </form>
     <br><br><br>
 <% end %>
 <br><br><br><br><br>
 
-
+<a href="/users" style="float: right;">View All Registered Users</a><br><br>
+<a href="/leagues" style="float: left;">View All Leagues</a>
 <a href="/users/<%= @user.id %>/edit" style="float: right;">Update Profile</a><br><br>
 <a href="/leagues/join" style="float: left;">Join a League</a>
 <a href="/logout" style="float: right;">Log out</a>

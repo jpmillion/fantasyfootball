@@ -17,7 +17,6 @@ class LeagueController < ApplicationController
 
     post '/leagues' do
         if !params[:league_id] || params[:team_name] == '' || League.find(params[:league_id]).teams.any? {|team| team.name == params[:team_name]}
-            flash[:notice] = "League and unique Team name required to join"
             redirect '/leagues/join'
         end
         team = Team.new(name: params[:team_name])
@@ -29,6 +28,11 @@ class LeagueController < ApplicationController
     get '/leagues/:id' do
         @league = League.find(params[:id])
         erb :'leagues/show'
+    end
+
+    get '/leagues/:id/players' do
+        @league = League.find(params[:id])
+        erb :'leagues/players/index'
     end
 
 end

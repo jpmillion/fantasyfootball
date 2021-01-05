@@ -1,0 +1,13 @@
+
+<div style="text-align: center">
+<a style="float: right;" href="/leagues/<%= @league.id %>">Back</a>
+<div><h1>Players</h1></div><br><br>
+
+<% @league.players.each do |player| %>
+
+    <p><%= player.name.titleize %></p>
+    <p><%= player.position.titleize %></p><br><br>
+
+<% end %>
+
+</div>
