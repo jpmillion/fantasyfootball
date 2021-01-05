@@ -1,9 +1,5 @@
 class PlayerController < ApplicationController
 
-    before '/players/*' do
-        login_required
-    end
-
     post '/players' do
         team = Team.find(params[:team_id]) if params[:team_id] != nil
         redirect "/teams/#{team.id}" if params[:name] == '' || params[:position] == nil || team.league.players.any? {|player| player.name == params[:name]}

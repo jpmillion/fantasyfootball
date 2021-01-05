@@ -1,10 +1,6 @@
 
 
 class UserController < ApplicationController
-
-    before '/users/:id/*' do
-        login_required
-    end
     
     get '/users' do
         login_required
@@ -29,11 +25,13 @@ class UserController < ApplicationController
     end
 
     get '/users/:id' do
+        login_required
         @user = current_user
         erb :'users/show'
     end
 
     get '/users/:id/edit' do
+        login_required
         @user = current_user
         erb :'users/edit'
     end
@@ -49,7 +47,7 @@ class UserController < ApplicationController
     end
 
     delete '/users' do
-        current_user.destroy
+        current_user.delete
         session.clear
         redirect '/'
     end
