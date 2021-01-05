@@ -1,6 +1,8 @@
 require './config/environment'
 class ApplicationController < Sinatra::Base
 
+  register Sinatra::Flash
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -25,6 +27,7 @@ class ApplicationController < Sinatra::Base
 
     def login_required
       if !logged_in?
+        flash[:notice] = "**Login Required!!"
         redirect '/login'
       end
     end

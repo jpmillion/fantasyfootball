@@ -16,12 +16,16 @@ class LeagueController < ApplicationController
     end
 
     post '/leagues' do
-        redirect '/leagues/join' if !params[:league_id] || params[:team_name] == '' || League.find(params[:league_id]).teams.any? {|team| team.name == params[:team_name]}
-        
-        league, team, user = League.find(params[:league_id]), Team.new(name: params[:team_name]), current_user
-        league.teams << team
-        user.teams << team        
-        redirect "/users/#{user.id}"
+        if !params[:league_id] || params[:team_name] == '' || League.find(params[:league_id]).teams.any? {|team| team.name == params[:team_name]}
+            flash[:notice] = "**Please try again"
+            redirect '/leagues/join'
+        else
+            league, team, user = League.find(params[:league_id]), Team.new(name: params[:team_name]), current_user
+            league.teams << team
+            user.teams << team  
+            flash[:notice] = "Congratulations, #{team.name.titleize} will compete in the #{league.name.titleize} league!"      
+            redirect "/users/#{user.id}"
+        end
     end
 
     get '/leagues/:id' do

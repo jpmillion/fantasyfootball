@@ -1,5 +1,4 @@
-require 'rack-flash'
-require 'sinatra/redirect_with_flash'
+
 class SessionController < ApplicationController
 
     get '/login' do
@@ -8,10 +7,11 @@ class SessionController < ApplicationController
     end
 
     post '/login' do
-        user = User.find_by(username: params[:username])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id 
-            redirect "/users/#{user.id}"
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            flash[:notice] = "Welcome #{@user.username}!" 
+            redirect "/users/#{@user.id}"
         else
             redirect '/login'
         end
@@ -19,6 +19,7 @@ class SessionController < ApplicationController
 
     get '/logout' do
         session.clear
+        flash[:notice] = "**You are now logged out"
         redirect '/'
     end
 

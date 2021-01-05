@@ -22,8 +22,10 @@ class TeamController < ApplicationController
         team = Team.find(params[:id]) 
         
         if team.update(name: params[:team_name])
+            flash[:notice] = "Successfully changed team name!"
             redirect "/teams/#{team.id}"
         else
+            flash[:notice] = team.errors.full_messages.join
             redirect "/teams/#{team.id}/edit"
         end
     end
@@ -31,6 +33,7 @@ class TeamController < ApplicationController
     delete '/teams' do
         league = League.find(params[:league_id])
         current_user.teams.detect {|team| team.league == league}.destroy
+        flash[:notice] = "You have successfully quit the #{league.name.titleize} league!"
         redirect "/users/#{current_user.id}"
     end
 end

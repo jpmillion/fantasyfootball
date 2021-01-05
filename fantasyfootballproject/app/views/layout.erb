@@ -17,6 +17,13 @@
 
     <div class="wrapper">
 
+      <% flash.keys.each do |type| %>
+      <div data-alert style="text-align: center; color: red;">
+      <h4><%= flash[type] %></h4>
+      <!-- <a href="#" class="close">&times;</a> -->
+      </div>
+      <% end %>
+
         <%= yield %>
 
       <footer class="branding">

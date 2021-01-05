@@ -49,6 +49,7 @@ class UserController < ApplicationController
     delete '/users' do
         current_user.destroy
         session.clear
+        flash[:notice] = "**Account deleted"
         redirect '/'
     end
 
