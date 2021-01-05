@@ -1,4 +1,17 @@
 <div style="text-align: center;">
+
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+        <% @user.errors.full_messages.each do |message| %>
+            <ul>
+                <li><%= message %></li>
+            </ul>
+        <% end %>
+    </div>
+<% end %>
+
+
+
 <h1>Update User Profile</h1>
 
 

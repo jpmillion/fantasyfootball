@@ -19,7 +19,6 @@ class UserController < ApplicationController
             session[:user_id] = @user.id
             redirect "/users/#{@user.id}"
         else
-            
             erb :'users/new'
         end
     end
@@ -32,13 +31,17 @@ class UserController < ApplicationController
 
     get '/users/:id/edit' do
         login_required
-        @user = User.find(params[:id])
+        @user = current_user
         erb :'users/edit'
     end
 
     patch '/users' do
-        current_user.update(username: params[:username], email: params[:email])
-        redirect "/users/#{current_user.id}"
+        @user = current_user
+        if @user.update(username: params[:username], email: params[:email])
+            redirect "/users/#{@user.id}"
+        else
+            erb :'users/edit'
+        end
     end
 
     delete '/users' do
