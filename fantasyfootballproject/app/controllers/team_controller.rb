@@ -15,12 +15,13 @@ class TeamController < ApplicationController
     end
 
     patch '/teams/:id' do
-        @team = Team.find(params[:id])
-        redirect "/teams/#{@team.id}/edit" if params[:team_name] == '' 
-        @team.update(name: params[:team_name])
-        flash[:notice] = "Successfully Changed Team Name"
-        erb :'teams/show'
-        #redirect "/teams/#{team.id}"
+        team = Team.find(params[:id]) 
+        
+        if team.update(name: params[:team_name])
+            redirect "/teams/#{team.id}"
+        else
+            redirect "/teams/#{team.id}/edit"
+        end
     end
 
     delete '/teams' do
