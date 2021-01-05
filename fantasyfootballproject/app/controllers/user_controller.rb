@@ -14,13 +14,13 @@ class UserController < ApplicationController
     end
 
     post '/users' do
-        user = User.create(params[:user])
-        if user.valid?
-            session[:user_id] = user.id
-            redirect "/users/#{user.id}"
+        @user = User.new(params[:user])
+        if @user.save
+            session[:user_id] = @user.id
+            redirect "/users/#{@user.id}"
         else
-            user.delete
-            redirect 'users/new'
+            
+            erb :'users/new'
         end
     end
 

@@ -1,4 +1,17 @@
+    <% if @user %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation" style="text-align: center;">
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+
 <h1 style="text-align: center;">Create an Account</h1>
+
 
 <form style="text-align: center;" action="/users" method="post">
     <input type="text" name="user[username]" placeholder="Create a username"><br><br>
