@@ -11,7 +11,11 @@ class TeamController < ApplicationController
 
     get '/teams/:id/edit' do
         @team = Team.find(params[:id])
-        erb :'teams/edit'
+        if current_user.id == @team.user_id
+            erb :'teams/edit'
+        else
+            redirect "/users/#{current_user.id}"
+        end
     end
 
     patch '/teams/:id' do
@@ -26,7 +30,7 @@ class TeamController < ApplicationController
 
     delete '/teams' do
         league = League.find(params[:league_id])
-        current_user.teams.detect {|team| team.league == league}.delete
+        current_user.teams.detect {|team| team.league == league}.destroy
         redirect "/users/#{current_user.id}"
     end
 end

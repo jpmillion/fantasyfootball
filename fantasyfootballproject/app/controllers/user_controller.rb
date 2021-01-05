@@ -47,7 +47,7 @@ class UserController < ApplicationController
     end
 
     delete '/users' do
-        current_user.delete
+        current_user.destroy
         session.clear
         redirect '/'
     end

@@ -9,7 +9,7 @@ class PlayerController < ApplicationController
     end
 
     delete '/players' do 
-        Player.delete(params[:player_id])
+        Player.destroy(params[:player_id])
         redirect "/teams/#{params[:team_id]}"
     end
 end
