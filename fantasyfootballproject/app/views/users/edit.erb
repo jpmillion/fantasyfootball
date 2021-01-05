@@ -15,7 +15,7 @@
 <h1>Update User Profile</h1>
 
 
-<form action="/users" method="post">
+<form action="/users/<%= @user.id %>" method="post">
     <input type="hidden" name="_method" value="patch">
     <input type="text" name="username" value="<%= @user.username %>"><br><br>
     <input type="email" name="email" value="<%= @user.email %>"><br><br>

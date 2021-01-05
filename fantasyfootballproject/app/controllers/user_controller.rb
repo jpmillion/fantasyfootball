@@ -2,6 +2,10 @@
 
 class UserController < ApplicationController
 
+    before '/users/*' do
+        login_required
+    end
+    
     get '/users' do
         login_required
         @users = User.all  
@@ -35,12 +39,13 @@ class UserController < ApplicationController
         erb :'users/edit'
     end
 
-    patch '/users' do
-        @user = current_user
+    patch '/users/:id' do
+        @user = User.find(params[:id])
+        
         if @user.update(username: params[:username], email: params[:email])
             redirect "/users/#{@user.id}"
-        else
-            erb :'users/edit'
+        else 
+            redirect "/users/#{@user.id}/edit"
         end
     end
 
